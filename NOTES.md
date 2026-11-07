@@ -100,6 +100,11 @@ Spotify's standard export fields:
 
 Things I'll run into:
 - Very short plays are noise. Spotify itself counts a stream at 30 seconds.
+  But songs shorter than 30s (Pig Destroyer, interludes) could never count, so
+  also count a short play if `reason_end == "trackdone"` (1,030 plays, 441 songs).
+  Don't use `skipped == False` for this: 64,443 short plays say not-skipped but
+  ended with next/back. Loophole: `trackdone` after dragging the progress bar to
+  the end. At step 5, with real track lengths, require play time ≈ track length.
 - Some rows (podcasts, local files) have no track name or URI.
 - Copy the file into `data/` and gitignore it. It's personal history.
 - A fresh export comes from Spotify's privacy page as `my_spotify_data.zip`
