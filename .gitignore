@@ -1,0 +1,7 @@
+# personal listening history, caches and credentials
+data/
+.env
+
+__pycache__/
+*.pyc
+.venv/
