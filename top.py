@@ -10,7 +10,6 @@ with gzip.open(history_file, "rt", encoding="utf-8") as f:
     data = json.load(f)
 
 rows = data["rows"]
-print(len(rows))
 
 plays = Counter()
 
@@ -24,6 +23,7 @@ for row in rows:
     
     plays[key] += 1
 
-print(sum(plays.values()))
-print(len(plays))
-print(plays.most_common(5))
+print(f"{sum(plays.values()):,} plays of {len(plays):,} songs")
+
+for rank, ((artist, track), count) in enumerate(plays.most_common(50), start=1):
+    print(f"{rank:>2}. {artist} - {track} ({count})")
